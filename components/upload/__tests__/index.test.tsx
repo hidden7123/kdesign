@@ -1,5 +1,6 @@
 import React from 'react'
 import { render, mount } from 'enzyme'
+import ConfigProvider from '../../config-provider'
 import Upload from '../index'
 import Icon from '../../icon'
 import Button from '../../button'
@@ -123,6 +124,46 @@ describe('Upload', () => {
     expect(onChangeMock).toHaveBeenCalled()
   })
 
+  // 8.config provider
+  it('config provider', () => {
+    const localeData = {
+      'Upload.fail': '上传失败',
+    }
+    const initFiles = [
+      {
+        uid: '-4',
+        name: 'image6.png',
+        status: 'error',
+        url: 'https://kui.kingdee.com/assets/image/img03.jpg',
+      },
+    ] as unknown as UploadFile[]
+
+    const uploadConfig = {
+      compDefaultProps: {
+        Upload: {},
+      },
+      localeConfig: { localeData, locale: 'zh-EN' },
+    }
+    const wrapper = mount(
+      <ConfigProvider value={uploadConfig}>
+        <Upload
+          action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+          fileList={initFiles}
+          listType="picture"
+          style={{
+            width: '100%',
+          }}
+        ></Upload>
+      </ConfigProvider>,
+    )
+    const mulWrapper = mount(
+      <ConfigProvider>
+        <Upload disabled={true} />
+      </ConfigProvider>,
+    )
+    expect(mulWrapper.find('.kd-upload')).toHaveClassName('.disabled')
+    expect(wrapper.find('.kd-upload-picture-list-item-error-text')).toHaveText('上传失败')
+  })
   // api
   it('api test', () => {
     const wrapper = mount(<Upload {...defaultUploadProps}>{uploadButton}</Upload>)

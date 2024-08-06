@@ -83,7 +83,7 @@ const QRCode = (props: QRCodeProps): FunctionComponentElement<QRCodeProps> => {
     [`${qrCodePrefixCls}-borderless`]: !bordered,
   })
 
-  const qrCodeLanMsg = getCompLangMsg({ componentName: 'QRCode' })
+  const qrCodeLangMsg = getCompLangMsg({ componentName: 'QRCode' })
   const gap = 8
   const containerSize = size + gap * 2 + 2
 
@@ -120,10 +120,10 @@ const QRCode = (props: QRCodeProps): FunctionComponentElement<QRCodeProps> => {
           {status === 'loading' && <Spin />}
           {status === 'expired' && (
             <>
-              <p className={`${qrCodePrefixCls}-expired`}>{qrCodeLanMsg.qrCodeExpired}</p>
+              <p className={`${qrCodePrefixCls}-expired`}>{qrCodeLangMsg.qrCodeExpired}</p>
               {onRefresh && (
                 <Button icon={<Icon type="refresh" />} type="text" onClick={onRefresh} size="middle">
-                  {qrCodeLanMsg.clickRefresh}
+                  {qrCodeLangMsg.clickRefresh}
                 </Button>
               )}
             </>

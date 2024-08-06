@@ -36,7 +36,7 @@ class LocaleCache {
    */
   setLocalesData(locale: string, localeData?: LocaleDataType) {
     if (!(localeData || this.localesData[locale])) {
-      console.error(`Missing language package for ${locale}. Please check and reconfigure.`)
+      console.error(`Missing language pack for ${locale}. Please check and reconfigure.`)
       return
     }
     const newLocaleData = { ...zhCNData, ...localeData }

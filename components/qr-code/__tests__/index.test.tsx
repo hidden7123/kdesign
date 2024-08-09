@@ -1,5 +1,6 @@
 import React from 'react'
 import { mount, render } from 'enzyme'
+import ConfigProvider from '../../config-provider/index'
 // import ConfigProvider from '../../config-provider/index'
 import QRCode, { QRCodeErrorLevels, QRCodeStatus, QRCodeTypes } from '../index'
 import mountTest from '../../../tests/shared/mountTest'
@@ -83,5 +84,29 @@ describe('QRCode', () => {
       // bordered
       expect(borderlessQRCode.find('.kd-qrcode')).toHaveClassName('kd-qrcode-borderless')
     })
+  })
+})
+
+// 8.config provider
+describe('8.config provider', () => {
+  it('should config use config provider', () => {
+    const localeData = {
+      'QRCode.qrCodeExpired': 'The QR code has expired.',
+    }
+    const qrcodeConfig = {
+      compDefaultProps: {
+        QRCode: {
+          bordered: false,
+        },
+      },
+      localeConfig: { localeData, locale: 'zh-EN' },
+    }
+    const wrapper = mount(
+      <ConfigProvider value={qrcodeConfig}>
+        <QRCode value={value} status={'expired'} />
+      </ConfigProvider>,
+    )
+    expect(wrapper.find('.kd-qrcode')).toHaveClassName('.kd-qrcode-borderless')
+    expect(wrapper.find('.kd-qrcode-expired')).toHaveText('The QR code has expired.')
   })
 })

@@ -39,16 +39,10 @@ export interface PreviewProps {
 }
 
 const Preview: React.FC<PreviewProps> = (props) => {
-  const {
-    getPrefixCls,
-    prefixCls: pkgPrefixCls,
-    compDefaultProps: userDefaultProps,
-    locale,
-  } = React.useContext(ConfigContext)
+  const { getPrefixCls, prefixCls: pkgPrefixCls, compDefaultProps: userDefaultProps } = React.useContext(ConfigContext)
 
   // 属性需要合并一遍用户定义的默认属性
   const allProps = getCompProps('Image', userDefaultProps, props)
-  const imageLangMsg = locale.getCompLangMsg({ componentName: 'Image' })
 
   const {
     src,
@@ -180,7 +174,7 @@ const Preview: React.FC<PreviewProps> = (props) => {
             {operations}
             <span onClick={onClose}>
               <Icon type="close-solid" />
-              {imageLangMsg.close}
+              关闭
             </span>
           </div>
         </div>

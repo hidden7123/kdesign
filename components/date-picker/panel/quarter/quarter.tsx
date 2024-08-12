@@ -14,12 +14,11 @@ import {
 } from '../../utils/date-fns'
 import { DateType, RangeValue } from '../../interface'
 import useRangeCls from '../../hooks/use-range-cls'
-import { DisabledDataProps } from '../../date-picker'
 
 const quarterList = ['Q1', 'Q2', 'Q3', 'Q4']
 
 interface QuarterProps {
-  disabledDate?: DisabledDataProps
+  disabledDate?: (date: DateType) => boolean
 }
 
 function Quarter(props: QuarterProps) {
@@ -37,7 +36,7 @@ function Quarter(props: QuarterProps) {
     cellRender,
     range,
   } = context
-  const disabledInfo: any = { panelType: 'quarter', range }
+
   const { disabledDate } = props
 
   let _dateValue: RangeValue | DateType
@@ -103,7 +102,7 @@ function Quarter(props: QuarterProps) {
   })
 
   const handleClick = (date: DateType) => {
-    if (!(disabledDate && disabledDate(date, disabledInfo))) {
+    if (!(disabledDate && disabledDate(date))) {
       onSelect(date, 'mouse')
     }
   }
@@ -114,7 +113,7 @@ function Quarter(props: QuarterProps) {
       const _props = {
         onClick: () => handleClick(quarter),
         onMouseEnter: () => {
-          if (onDateMouseEnter && !(disabledDate && disabledDate(quarter, disabledInfo))) {
+          if (onDateMouseEnter && !(disabledDate && disabledDate(quarter))) {
             onDateMouseEnter(quarter)
           }
         },
@@ -128,7 +127,7 @@ function Quarter(props: QuarterProps) {
       const quarterCls = classnames(
         `${prefixCls}-quarter-item`,
         {
-          [`${prefixCls}-quarter-item-disabled`]: disabledDate && disabledDate(quarter, disabledInfo),
+          [`${prefixCls}-quarter-item-disabled`]: disabledDate && disabledDate(quarter),
         },
         getRangeCls(quarter),
       )

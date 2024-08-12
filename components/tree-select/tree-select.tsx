@@ -42,7 +42,7 @@ const InternalTreeSelect: React.ForwardRefRenderFunction<ITreeSelectProps<TreeSe
   props: any,
   ref: unknown,
 ) => {
-  const { getPrefixCls, prefixCls, compDefaultProps: userDefaultProps, locale } = useContext(ConfigContext)
+  const { getPrefixCls, prefixCls, compDefaultProps: userDefaultProps } = useContext(ConfigContext)
   const treeSelectProps = getCompProps('TreeSelect', userDefaultProps, props)
   const {
     size,
@@ -65,7 +65,7 @@ const InternalTreeSelect: React.ForwardRefRenderFunction<ITreeSelectProps<TreeSe
     onChange,
     onSearch,
     defaultValue,
-    placeholder = locale.getLangMsg('global', 'placeholder'),
+    placeholder,
     dropdownStyle,
     style,
     clearIcon,
@@ -347,7 +347,7 @@ const InternalTreeSelect: React.ForwardRefRenderFunction<ITreeSelectProps<TreeSe
       [`${selectPrefixCls}-dropdown-empty`]: true,
     })
     const { notFoundContent } = treeSelectProps
-    const emptyContent = notFoundContent || locale.getLangMsg('global', 'emptyText')
+    const emptyContent = notFoundContent || '暂无数据'
     return <div className={emptyListCls}>{emptyContent}</div>
   }
 
@@ -438,7 +438,6 @@ const InternalTreeSelect: React.ForwardRefRenderFunction<ITreeSelectProps<TreeSe
       [`${selectPrefixCls}-selection-item-${size}`]: size,
     })
     const TagStyle = { margin: '2px 8px 2px 0', maxWidth: '100%' }
-    const totalText = locale.getLangMsg('TreeSelect', 'total', { total: selectTreeNodes.length })
     return (
       <div className={multipleCls} ref={selectionRef}>
         {Array.isArray(selectTreeNodes) && (
@@ -478,7 +477,7 @@ const InternalTreeSelect: React.ForwardRefRenderFunction<ITreeSelectProps<TreeSe
                 handleMaxTagHolder()
               ) : (
                 <span className={itemCls}>
-                  <span className={`${selectPrefixCls}-selection-item-content`}>{totalText}</span>
+                  <span className={`${selectPrefixCls}-selection-item-content`}>共{selectTreeNodes.length}项</span>
                 </span>
               )
             ) : null}

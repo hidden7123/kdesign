@@ -23,7 +23,6 @@ import { addMonths, addYears, getMonth, getYear, getYearsPeriod, DEFAULT_YEAR_IT
 import { getClosingViewDate, getTimeProps } from './utils'
 import isBoolean from 'lodash/isBoolean'
 import DateTime from './panel/date-time/date-time'
-import { DisabledDataProps } from './date-picker'
 
 export interface PickerPanelSharedProps {
   prefixCls?: string
@@ -52,7 +51,7 @@ export interface PickerPanelSharedProps {
   showWeeksTitle?: boolean
 
   // Date
-  disabledDate?: DisabledDataProps
+  disabledDate?: (date: DateType) => boolean
 
   // Render
   dateRender?: DateRender

@@ -50,7 +50,7 @@ const InternalSelect: React.ForwardRefRenderFunction<ISelectProps<SelectValue>> 
     labelInValue,
     children,
     options,
-    placeholder = locale.getLangMsg('global', 'placeholder'),
+    placeholder,
     dropdownStyle = {},
     style,
     clearIcon,
@@ -541,7 +541,7 @@ const InternalSelect: React.ForwardRefRenderFunction<ISelectProps<SelectValue>> 
       [`${selectPrefixCls}-dropdown-empty`]: true,
     })
     const { notFoundContent } = selectProps
-    const emptyContent = notFoundContent || locale.getLangMsg('global', 'emptyText')
+    const emptyContent = notFoundContent || '暂无数据'
     return filledOptions?.length === 0 && <div className={emptyListCls}>{emptyContent}</div>
   }
 
@@ -716,7 +716,6 @@ const InternalSelect: React.ForwardRefRenderFunction<ISelectProps<SelectValue>> 
       [`${selectPrefixCls}-selection-item-${size}`]: size,
     })
     const TagStyle = { margin: '2px 8px 2px 0', maxWidth: '100%' }
-    const totalText = locale.getLangMsg('Select', 'total', { total: mulOptions.length })
     return (
       <div className={multipleCls} ref={selectionRef}>
         {Array.isArray(mulOptions) ? (
@@ -752,7 +751,7 @@ const InternalSelect: React.ForwardRefRenderFunction<ISelectProps<SelectValue>> 
                 handleMaxTagHolder()
               ) : (
                 <span className={itemCls}>
-                  <span className={`${selectPrefixCls}-selection-item-content`}>{totalText}</span>
+                  <span className={`${selectPrefixCls}-selection-item-content`}>共{mulOptions.length}项</span>
                 </span>
               )
             ) : null}

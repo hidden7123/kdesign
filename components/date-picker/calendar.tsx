@@ -4,9 +4,8 @@ import classnames from 'classnames'
 import Week from './panel/week/week'
 import Context from './context'
 import { getStartOfWeek, getStartOfMonth, addWeeks } from './utils/date-fns'
-import { PickerMode, SharedTimeProps } from './interface'
+import { DateType, PickerMode, SharedTimeProps } from './interface'
 import { RangeShowTimeObject } from './range-picker'
-import { DisabledDataProps } from './date-picker'
 
 export interface CalendarProps {
   picker: PickerMode
@@ -14,7 +13,7 @@ export interface CalendarProps {
   showWeekNumber?: boolean
   showWeeksTitle?: boolean
   showTime?: boolean | SharedTimeProps | RangeShowTimeObject
-  disabledDate?: DisabledDataProps
+  disabledDate?: (date: DateType) => boolean
 }
 
 const DATE_ROW_COUNT = 6

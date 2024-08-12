@@ -390,8 +390,6 @@ const InternalUpload: ForwardRefRenderFunction<unknown, UploadProps> = (props, r
 }
 
 const Item: FC<IFileItem> = ({ file, prefixCls, listType, handleReUpload, handleRemove, disabled, onPreview }) => {
-  const { locale } = useContext(ConfigContext)
-  const uploadLangMsg = locale.getCompLangMsg({ componentName: 'Upload' })
   const mapStatus: Record<string, string> = {
     uploading: 'loadding',
     error: 'warning-solid',
@@ -422,7 +420,7 @@ const Item: FC<IFileItem> = ({ file, prefixCls, listType, handleReUpload, handle
                 className={`${prefixCls}-${listType}-list-item-reupload`}
                 onClick={handleReUpload.bind(this, file)}
               >
-                {uploadLangMsg.reUpload}
+                重新上传
               </a>
             )}
             {!disabled && (
@@ -431,20 +429,20 @@ const Item: FC<IFileItem> = ({ file, prefixCls, listType, handleReUpload, handle
                 className={`${prefixCls}-${listType}-list-item-delete`}
                 onClick={handleRemove.bind(this, file)}
               >
-                {uploadLangMsg.delete}
+                删除
               </a>
             )}
           </div>
         </>
       ) : file.status === 'uploading' ? (
         <div className={`${prefixCls}-${listType}-list-item-loading`}>
-          <Progress percent={file.percent} textMap={[uploadLangMsg.uploading]} showInfo={false} />
+          <Progress percent={file.percent} textMap={['文件上传中']} showInfo={false} />
         </div>
       ) : file.status === 'error' ? (
         <div className={`${prefixCls}-${listType}-list-item-error`}>
           <div className={`${prefixCls}-${listType}-list-item-error-text`}>
             <Icon type={mapStatus[file.status as string]} style={{ verticalAlign: 'top' }} />
-            {uploadLangMsg.fail}
+            上传失败
           </div>
           {!disabled && (
             <div className={`${prefixCls}-${listType}-list-item-action`}>
@@ -453,14 +451,14 @@ const Item: FC<IFileItem> = ({ file, prefixCls, listType, handleReUpload, handle
                 className={`${prefixCls}-${listType}-list-item-reupload`}
                 onClick={handleReUpload.bind(this, file)}
               >
-                {uploadLangMsg.reUpload}
+                重新上传
               </a>
               <a
                 href="true"
                 className={`${prefixCls}-${listType}-list-item-delete`}
                 onClick={handleRemove.bind(this, file)}
               >
-                {uploadLangMsg.delete}
+                删除
               </a>
             </div>
           )}

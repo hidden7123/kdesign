@@ -2,29 +2,11 @@
 
 exports[`Tooltip render Test 1`] = `
 <Tooltip
-  tip={
-    <span>
-      text
-    </span>
-  }
+  tip="tips text"
 >
-  <Popper
-    arrow={true}
-    placement="top"
-    prefixCls="kd-tooltip"
-    tip={
-      <span>
-        text
-      </span>
-    }
-    trigger="hover"
-  >
-    <span
-      className="kd-popper-reference"
-    >
-      text
-    </span>
-  </Popper>
+  <span>
+    text
+  </span>
 </Tooltip>
 `;
 
@@ -32,77 +14,67 @@ exports[`Tooltip special case 测试ref返回值不为dom元素 1`] = `
 <Tooltip
   tip="tips text"
 >
-  <Popper
-    arrow={true}
-    placement="top"
-    prefixCls="kd-tooltip"
-    tip="tips text"
-    trigger="hover"
+  <Input
+    borderType="bordered"
+    prefix="KDesign"
+    suffix="Kdesign"
   >
-    <Input
+    <ClearableInput
       borderType="bordered"
-      className="kd-popper-reference"
+      element={
+        <input
+          className="kd-input kd-input-size-middle"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onFocus={[Function]}
+          onKeyUp={[Function]}
+          prefix="KDesign"
+          type="text"
+          value=""
+        />
+      }
+      focused={false}
+      handleReset={[Function]}
+      inputCount={null}
+      inputType="input"
       prefix="KDesign"
+      prefixCls="kd-input"
+      size="middle"
       suffix="Kdesign"
+      type="text"
+      value=""
     >
-      <ClearableInput
-        borderType="bordered"
-        className="kd-popper-reference"
-        element={
-          <input
-            className="kd-input kd-input-size-middle"
-            onBlur={[Function]}
-            onChange={[Function]}
-            onFocus={[Function]}
-            onKeyUp={[Function]}
-            prefix="KDesign"
-            type="text"
-            value=""
-          />
-        }
-        focused={false}
-        handleReset={[Function]}
-        inputCount={null}
-        inputType="input"
-        prefix="KDesign"
-        prefixCls="kd-input"
-        size="middle"
-        suffix="Kdesign"
-        type="text"
-        value=""
+      <span
+        className="kd-input-wrapper kd-input-wrapper-size-middle"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
       >
         <span
-          className="kd-input-wrapper kd-input-wrapper-size-middle kd-popper-reference"
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
+          className="kd-input-prefix"
+          onMouseDown={[Function]}
         >
-          <span
-            className="kd-input-prefix"
-            onMouseDown={[Function]}
-          >
-            KDesign
-          </span>
-          <input
-            className="kd-input kd-input-size-middle"
-            onBlur={[Function]}
-            onChange={[Function]}
-            onFocus={[Function]}
-            onKeyUp={[Function]}
-            prefix="KDesign"
-            style={null}
-            type="text"
-            value=""
-          />
-          <span
-            className="kd-input-suffix"
-            onMouseDown={[Function]}
-          >
-            Kdesign
-          </span>
+          KDesign
         </span>
-      </ClearableInput>
-    </Input>
-  </Popper>
+        <input
+          className="kd-input kd-input-size-middle"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onFocus={[Function]}
+          onKeyUp={[Function]}
+          prefix="KDesign"
+          style={null}
+          type="text"
+          value=""
+        />
+        <span
+          className="kd-input-suffix"
+          onMouseDown={[Function]}
+        >
+          Kdesign
+        </span>
+      </span>
+    </ClearableInput>
+  </Input>
 </Tooltip>
 `;

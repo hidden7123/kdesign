@@ -45,12 +45,7 @@ const InternalImageCropper = (
   const [cropperSrc, setCropperSrc] = useState(props.image || '')
   const innerRef = useRef<CropperInstance | null>(null)
   const cropperRef = (forwardedRef as any) || innerRef
-  const {
-    getPrefixCls,
-    prefixCls: pkgPrefixCls,
-    compDefaultProps: userDefaultProps,
-    locale,
-  } = React.useContext(ConfigContext)
+  const { getPrefixCls, prefixCls: pkgPrefixCls, compDefaultProps: userDefaultProps } = React.useContext(ConfigContext)
 
   const {
     prefixCls: customPrefixcls,
@@ -65,7 +60,7 @@ const InternalImageCropper = (
     viewMode,
     aspectRatio,
     modal,
-    okText = locale.getLangMsg('ImageCropper', 'okText'),
+    okText,
     okBtn,
     image = '',
     zoomOnWheel,

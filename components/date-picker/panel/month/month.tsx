@@ -15,7 +15,6 @@ import {
 import Context from '../../context'
 import { DateType, RangeValue } from '../../interface'
 import useRangeCls from '../../hooks/use-range-cls'
-import { DisabledDataProps } from '../../date-picker'
 
 const monthsThreeColumns = [
   [0, 1, 2],
@@ -26,7 +25,7 @@ const monthsThreeColumns = [
 
 export interface MonthProps {
   showFullMonth?: boolean
-  disabledDate?: DisabledDataProps
+  disabledDate?(date: DateType): boolean
 }
 
 function Month(props: MonthProps) {
@@ -47,7 +46,7 @@ function Month(props: MonthProps) {
     cellRender,
     range,
   } = context
-  const disabledInfo: any = { panelType: 'month', range }
+
   const { disabledDate } = props
 
   let _dateValue: RangeValue | DateType
@@ -114,7 +113,7 @@ function Month(props: MonthProps) {
 
   const handleClick = (date: DateType) => {
     if (innerPicker === undefined) {
-      if (!(disabledDate && disabledDate(date, disabledInfo))) {
+      if (!(disabledDate && disabledDate(date))) {
         onSelect(date, 'mouse')
       }
     } else {
@@ -135,7 +134,7 @@ function Month(props: MonthProps) {
           const _props = {
             onClick: () => handleClick(month),
             onMouseEnter: () => {
-              if (onDateMouseEnter && !(disabledDate && disabledDate(month, disabledInfo))) {
+              if (onDateMouseEnter && !(disabledDate && disabledDate(month))) {
                 onDateMouseEnter(month)
               }
             },
@@ -149,7 +148,7 @@ function Month(props: MonthProps) {
           const monthItemCls = classnames(
             `${prefixCls}-month-item`,
             {
-              [`${prefixCls}-month-item-disabled`]: disabledDate && disabledDate(month, disabledInfo),
+              [`${prefixCls}-month-item-disabled`]: disabledDate && disabledDate(month),
             },
             getRangeCls(month),
           )

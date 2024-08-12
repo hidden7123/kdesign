@@ -17,13 +17,12 @@ import {
 import { DateType, PickerMode, RangeValue } from '../../interface'
 import useRangeCls from '../../hooks/use-range-cls'
 import { getClosingViewDate } from '../../utils'
-import { DisabledDataProps } from '../../date-picker'
 
 export interface YearProps {
   yearItemNumber: number
   minDate?: DateType
   maxDate?: DateType
-  disabledDate?: DisabledDataProps
+  disabledDate?: (date: DateType) => boolean
   picker?: PickerMode
 }
 
@@ -44,7 +43,7 @@ function Year(props: YearProps) {
     cellRender,
     range,
   } = context
-  const disabledInfo: any = { panelType: 'year', range }
+
   const { yearItemNumber, disabledDate, picker = 'date' } = props
 
   let _dateValue: RangeValue | DateType
@@ -108,7 +107,7 @@ function Year(props: YearProps) {
 
   const handleClick = (date: DateType) => {
     if (innerPicker === undefined) {
-      if (!(disabledDate && disabledDate(date, disabledInfo))) {
+      if (!(disabledDate && disabledDate(date))) {
         onSelect(date, 'mouse')
       }
     } else {
@@ -132,7 +131,7 @@ function Year(props: YearProps) {
       const _props = {
         onClick: () => handleClick(year),
         onMouseEnter: () => {
-          if (onDateMouseEnter && !(disabledDate && disabledDate(year, disabledInfo))) {
+          if (onDateMouseEnter && !(disabledDate && disabledDate(year))) {
             onDateMouseEnter(year)
           }
         },
@@ -150,7 +149,7 @@ function Year(props: YearProps) {
           className={classnames(
             `${prefixCls}-year-item`,
             {
-              [`${prefixCls}-year-item-disabled`]: disabledDate && disabledDate(year, disabledInfo),
+              [`${prefixCls}-year-item-disabled`]: disabledDate && disabledDate(year),
             },
             getRangeCls(year),
           )}

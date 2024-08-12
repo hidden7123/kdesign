@@ -5,7 +5,6 @@ import { Icon } from '../../index'
 import usePickerInput from '../hooks/use-picker-input'
 import { DateType, InputCommonProps, OutInputCommonProps } from '../interface'
 import { getInputSize, getPlaceholder, elementsContains } from '../utils'
-import { DisabledDataProps } from '../date-picker'
 
 export interface InputDateProps extends OutInputCommonProps, InputCommonProps {
   inputRef: React.RefObject<HTMLInputElement>
@@ -15,7 +14,7 @@ export interface InputDateProps extends OutInputCommonProps, InputCommonProps {
   disabled?: boolean
   hoverValue?: string
   placeholder?: string
-  disabledDate?: DisabledDataProps
+  disabledDate?: (currentDate: DateType) => boolean
   resetText: () => void
   setSelectedValue: (date: DateType | null) => void
   triggerTextChange: (value: string) => void

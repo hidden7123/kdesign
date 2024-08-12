@@ -10,8 +10,7 @@ export interface IconMap {
 
 const Content: React.FC<ContentProps> = (args) => {
   const { title, footer, content, closable, suffixCls, contentClose, showIcon, type, icon, closeNode } = args
-  const { prefixCls, locale } = useContext(ConfigContext)
-  const notificationLangMsg = locale.getCompLangMsg({ componentName: 'Notification' })
+  const { prefixCls } = useContext(ConfigContext)
   const classPrefix = `${prefixCls}-${suffixCls}-content`
 
   const iconMap: IconMap = {
@@ -54,9 +53,7 @@ const Content: React.FC<ContentProps> = (args) => {
       <div className={classNames(`${classPrefix}-title`)}>
         <div className={classNames(`${classPrefix}-title-left`)}>
           {renderIcon()}
-          <div className={classNames(`${classPrefix}-title-left-text`)}>
-            {typeof title === 'undefined' ? notificationLangMsg.title : title}
-          </div>
+          <div className={classNames(`${classPrefix}-title-left-text`)}>{title}</div>
         </div>
         {renderCloseIcon()}
       </div>
